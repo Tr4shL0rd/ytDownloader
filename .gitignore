@@ -1,0 +1,7 @@
+.env
+devTools/functionTester.py
+devTools/__pycache__
+__pycache__
+config.json
+devTools/functionTester.py
+downloads/*
