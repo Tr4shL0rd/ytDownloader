@@ -1,0 +1,3 @@
+import helper
+
+helper.emptyDownloadsFolder()
