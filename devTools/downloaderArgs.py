@@ -14,3 +14,15 @@ parser.add_argument(
     dest="no_download",
     action="store_true"
 )
+parser.add_argument(
+    "--version",
+    help="Print the version",
+    dest="version",
+    action="store_true"
+)
+parser.add_argument(
+    "--no-color", "-nc",
+    help="Don't use colors",
+    dest="no_color",
+    action="store_true"
+)

@@ -5,18 +5,19 @@ import devTools.helper as helper
 import devTools.mail as mail
 import json
 import devTools.downloaderArgs as downloaderArgs
+import os
+import sys
 
-# TODO: --no-color
-# TODO: --no-download
 # TODO: --json
-
 # todo stderr for errors
 # todo grep-able output
 
 args = downloaderArgs.parser.parse_args()
 if args.ignore == True:
     helper.INFO("Ignoring errors")
-
+if args.version == True:
+    helper.getVersion()
+    exit()
 
 
 def install():
@@ -52,7 +53,7 @@ def download():
             helper.ERROR("config.json is missing some values")
             return
     if json.loads(open("config.json").read())["written"] == True and helper.isDebug() == False:
-        sender = json.loads(open("config.json").read())["username"]
+        sender   = json.loads(open("config.json").read())["username"]
         password = json.loads(open("config.json").read())["password"]
         receiver = json.loads(open("config.json").read())["receiver"]
     else:
@@ -62,10 +63,19 @@ def download():
         
     allSongs = helper.getAllDownloads()
     if len(allSongs) == 0:
-        helper.INFO("No songs to download")
-        return
+        if args.no_color == False:
+            helper.ERROR("No songs to download")
+        elif args.no_color == True:
+            helper.ncERROR("No songs to download")
+            
+        elif args.ignore == True:
+            return 
     else:
+        print("here")
         for i, song in enumerate(allSongs):
+            if song in helper.debugSongs:
+                allSongs.remove(allSongs[i])
+
             print(f"[{i+1}/{len(allSongs)}] {allSongs[i]}")
             try:
                 mail.send(sender, password, receiver, f"downloads/{song}", f"{song}", f"{song}")

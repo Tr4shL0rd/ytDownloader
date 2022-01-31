@@ -1,9 +1,10 @@
+import re
 import os
 import sys
 import json
 import dotenv
 import youtube_dl
-import colorama
+import tkinter as tk
 
 from inspect import currentframe
 from rich.console import Console 
@@ -13,6 +14,17 @@ from rich.console import Console
 home = os.path.expanduser("~")
 urlsPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "urls.txt"))
 downloadsPath  = os.path.abspath(os.path.join(os.path.dirname(__file__),"..", "downloads"))
+debugSongs = ["youtube-dl test video ''_ä↭𝕐.mp3"] 
+def getVersion():
+    version = "0.5.0"
+    console = Console()
+    with console.capture():
+        returnMessage = f"[bold yellow]VERSION: {version}[/bold yellow]"
+    console.print(returnMessage)
+
+########## TKINTER ##########
+def deleteEntries(fields):
+    fields.delete("1.0", tk.END)
 
 ########## LOGGING ##########
 
@@ -34,6 +46,13 @@ def myHook(d:dict):
         print(f"Downloading \"{d['filename'].split('/')[-1]}\" [{d['_percent_str']}] [{d['_eta_str']}]", end='\r')
     
 ########## CHECKS ##########
+
+def urlIsValid(url:str):
+	regex = "^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$"
+	if re.search(regex, url):
+		return True
+	else:
+		return False
 
 def checkForCommentInUrlFile():
     with open(urlsPath, "r") as urls:
@@ -67,6 +86,7 @@ def checkIfConfigEmpty() -> bool:
         except json.decoder.JSONDecodeError:
             return True
     return False
+
 ########## OS, FILES, SYSTEM ##########
 def urlReader() -> list:
     urlList = []
@@ -213,3 +233,29 @@ def ERROR(additionalMessage="", traceback=None):
     if traceback:
         returnMessage += f"\n[bold red]TRACEBACK:\n[/bold red]{traceback}"
     console.print(returnMessage)
+
+########## COLORLESS WARNINGS ##########
+
+def ncWARNING(additionalMessage=""):
+    returnMessage = f"══════════════════════════\nWARNING | {sys.argv[0]} \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    if additionalMessage != "":
+        returnMessage = f"══════════════════════════\nWARNING | {sys.argv[0]} | {additionalMessage}  \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    print(returnMessage)
+
+def ncINFO(additionalMessage=""):
+    returnMessage = f"══════════════════════════\nINFO | {sys.argv[0]} \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    if additionalMessage != "":
+        returnMessage = f"══════════════════════════\nINFO | {sys.argv[0]} | {additionalMessage}  \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    print(returnMessage)
+    
+
+def nconelineInfo(Message=""):
+    print(f"INFO | {Message}\n══════════════════════════\n")
+    
+def ncERROR(additionalMessage="", traceback=None):
+    returnMessage = f"══════════════════════════\nERROR | {sys.argv[0]} \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    if additionalMessage != "":
+        returnMessage = f"══════════════════════════\nERROR | {sys.argv[0]} | {additionalMessage}  \nON LINE:{currentframe().f_back.f_lineno}\n══════════════════════════"
+    if traceback:
+        returnMessage += f"\nTRACEBACK:\n{traceback}"
+    print(returnMessage)
