@@ -47,7 +47,6 @@ class download_Button():
         image=download_Button_icon,
         text="Download",
         compound=tk.LEFT,
-        #command=lambda: print(url_Field.url_Field_Text.get())
         command=lambda: guiHelper.download(
             sender     = json.loads(open("config.json").read())["username"], 
             reciever   = json.loads(open("config.json").read())["receiver"], 
@@ -153,6 +152,7 @@ url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
 
 download_Button.download_Button_Butt.grid(column=1, row=4, sticky=tk.W, padx=5)
 load_Url_File.load_Url_File_Button.grid(column=1, row=5, sticky=tk.W)
+
 class getEntrie():
     def url():
         return url_Field.url_Field_Text.get()

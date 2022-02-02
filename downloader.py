@@ -21,6 +21,7 @@ if args.version == True:
 
 
 def install():
+    #youtube_dl options
     ydlOpts = {
         'format': 'bestaudio/best',
         "outtmpl": "downloads/%(title)s.%(ext)s",
@@ -33,7 +34,8 @@ def install():
         "progress_hooks": [helper.myHook],
     }
     url = helper.urlReader()
-    
+
+    #Downloads the youtube url 
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
         if args.no_download:
             for urlIndex in url:
@@ -52,15 +54,17 @@ def download():
         if helper.checkForConfigBlanks() == True:
             helper.ERROR("config.json is missing some values")
             return
+    # reads the config.json file and loads the fields into variables
     if json.loads(open("config.json").read())["written"] == True and helper.isDebug() == False:
         sender   = json.loads(open("config.json").read())["username"]
         password = json.loads(open("config.json").read())["password"]
         receiver = json.loads(open("config.json").read())["receiver"]
-    else:
+    else: #or reads the .env file 
         sender   = helper.getSender()
         password = helper.getPassword() 
         receiver = helper.getReceiver()
-        
+
+    #gets all files from downloads/
     allSongs = helper.getAllDownloads()
     if len(allSongs) == 0:
         if args.no_color == False:
@@ -71,12 +75,11 @@ def download():
         elif args.ignore == True:
             return 
     else:
-        print("here")
         for i, song in enumerate(allSongs):
             if song in helper.debugSongs:
-                allSongs.remove(allSongs[i])
+                allSongs.remove(song)
 
-            print(f"[{i+1}/{len(allSongs)}] {allSongs[i]}")
+            print(f"[{i+1}/{len(allSongs)}] {song}")
             try:
                 mail.send(sender, password, receiver, f"downloads/{song}", f"{song}", f"{song}")
             except smtplib.SMTPRecipientsRefused as traceback:

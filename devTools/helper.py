@@ -62,20 +62,18 @@ def checkForCommentInUrlFile():
     return False
 
 def checkBadLURLS():
-    #"/youtubeDownloader/devTools/urls.txt"
     with open(urlsPath, "r") as urlFile:
         lines = urlFile.readlines()
         for i,line in enumerate(lines):
             i += 1
             if "\n" in line:
-                return i # i == badline
+                return i
 
 def checkForConfigBlanks():
     with open("config.json", "r") as configFile:
         config = json.load(configFile)
         for key, value in config.items():
             if f"{key.upper()} BLANK!" == value:
-                #print(f"{key.upper()} is blank")
                 return True
     return False
 
@@ -88,9 +86,9 @@ def checkIfConfigEmpty() -> bool:
     return False
 
 ########## OS, FILES, SYSTEM ##########
+
 def urlReader() -> list:
     urlList = []
-    #/youtubeDownloader/devTools/urls.txt"
     with open(urlsPath, "r") as urls:
         for url in urls.readlines():
             url = url.replace("\n", "")
@@ -98,27 +96,21 @@ def urlReader() -> list:
     return urlList
 
 def getAllDownloads():
-    #path = "/youtubeDownloader/downloads"
     folder = []
-    #print("hje")
     for _,_, files in os.walk(downloadsPath):
         for file in files:
             folder.append(file)
     return folder
 
 def emptyDownloadsFolder(choice=True):
-    #path = "/youtubeDownloader/downloads/"
     for _, _,files in os.walk(downloadsPath):
         for file in files:
             if choice == True:
                 os.remove(os.path.join(downloadsPath,file))
             
 def removeEmptyLines():
-    #reads the file
-    #"/youtubeDownloader/devTools/urls.txt"
     with open(urlsPath, "r") as urlFile:
         lines = urlFile.readlines()
-    #remove newline characters from file
     with open(urlsPath, "w") as urlFile:
         goodLines = []
         for line in lines:
