@@ -77,15 +77,13 @@ def usefullMetaData(url):
 
 def fixSongNames(songs:list):
     blacklistWords = [
-        "(video)",
-        "(music video)",
-        "(official)",
-        "(official video)",
         "(official music video)",
         "(lyrics)",
         "(lyrics video)",
-        "(remix)",
-        "[HD]",
+        "(official)",
+        "(video)",
+        "(music video)",
+        "(official video)",
         ]
     exts = [
         ".mp3", 
@@ -102,12 +100,10 @@ def fixSongNames(songs:list):
     fixedSongNames = []
     for song in songs:
         for word in blacklistWords:
-            for ext in exts:
-                if word in song.lower():
-                    song = song.lower().replace(word, "")
-                    if song[song.index(ext)-1] == " ":
-                        song = song[:song.index(ext)-1] + song[song.index(ext):]
-                        fixedSongNames.append(song)
+            if word in song.lower():
+                song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ")
+                fixedSongNames.append(song)
+    
     return fixedSongNames
 
 ########## CHECKS ##########

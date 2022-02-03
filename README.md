@@ -10,6 +10,7 @@
 
 
 # TODO (CLI)
+* Prettify song titles
 * --json
 * stderr for errors
 * grep-able output
