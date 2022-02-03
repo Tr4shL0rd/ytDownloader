@@ -5,12 +5,7 @@ import devTools.helper as helper
 import devTools.mail as mail
 import json
 import devTools.downloaderArgs as downloaderArgs
-import os
-import sys
 
-# TODO: --json
-# todo stderr for errors
-# todo grep-able output
 
 args = downloaderArgs.parser.parse_args()
 if args.ignore:

@@ -7,3 +7,14 @@
 
 # RESOURCES
 * https://www.flaticon.com/
+
+
+# TODO (CLI)
+* --json
+* stderr for errors
+* grep-able output
+# TODO (GUI)
+* convert to executable
+* add radio buttons to toggle reading from file
+
+

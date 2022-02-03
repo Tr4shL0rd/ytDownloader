@@ -5,8 +5,6 @@ import tkinter as tk
 from tkinter import StringVar, ttk
 import tkinter.messagebox as messagebox
 import guiDevTools.guiHelper as guiHelper
-#TODO: convert to executable
-#TODO: add radio buttons to toggle reading from file
 print("PID:",os.getpgid(0))
 
 print(json.loads(open("config.json").read())["username"])
