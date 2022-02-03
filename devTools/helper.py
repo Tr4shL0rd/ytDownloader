@@ -65,6 +65,7 @@ ydlOpts = {
         ],
     }
 ########## STRING MANIPULATION ##########
+
 def usefullMetaData(url):
     returns = []
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
@@ -73,6 +74,42 @@ def usefullMetaData(url):
         returns.append(data["artist"])
         returns.append(data["thumbnail"])
         return returns
+
+def fixSongNames(songs:list):
+    blacklistWords = [
+        "(video)",
+        "(music video)",
+        "(official)",
+        "(official video)",
+        "(official music video)",
+        "(lyrics)",
+        "(lyrics video)",
+        "(remix)",
+        "[HD]",
+        ]
+    exts = [
+        ".mp3", 
+        ".wav",
+        ".flac", 
+        ".ogg", 
+        ".m4a", 
+        ".mp4", 
+        ".webm",
+        ".3gp", 
+        ".aac", 
+        ".flv", 
+    ]
+    fixedSongNames = []
+    for song in songs:
+        for word in blacklistWords:
+            for ext in exts:
+                if word in song.lower():
+                    song = song.lower().replace(word, "")
+                    if song[song.index(ext)-1] == " ":
+                        song = song[:song.index(ext)-1] + song[song.index(ext):]
+                        fixedSongNames.append(song)
+    return fixedSongNames
+
 ########## CHECKS ##########
 
 def urlIsValid(url:str):
