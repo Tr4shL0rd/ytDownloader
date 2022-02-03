@@ -23,16 +23,24 @@ def saveToConfig(senderName, senderPassword, reciever):
             }, 
             configFile
         )
-def install(url):
-    ydlOpts = {
-        'format': 'bestaudio/best',
+
+ydlOpts = {
+        "format": "bestaudio/best",
         "outtmpl": "downloads/%(title)s.%(ext)s",
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
+        "extractaudio": True,
+        "addmetadata": True,
+        "writethumbnail": True,
+        "postprocessors": [{
+            "key": "FFmpegExtractAudio",
+            "preferredcodec": "mp3",
+            "preferredquality": "192",
+        },
+            {"key": "FFmpegMetadata"},
+            {"key": "EmbedThumbnail"},
+        ],
     }
+
+def install(url):
     
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
         ydl.download([url])
@@ -66,7 +74,7 @@ def send(sender:str, password:str, receiver:str, attachment, subject="Title", bo
     
     #helper.emptyDownloadsFolder()
     mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-    if debug == True:
+    if debug:
         mail_server.set_debuglevel(1)
     mail_server.login(sender, password)
     mail_server.send_message(message)

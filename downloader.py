@@ -13,45 +13,39 @@ import sys
 # todo grep-able output
 
 args = downloaderArgs.parser.parse_args()
-if args.ignore == True:
+if args.ignore:
     helper.INFO("Ignoring errors")
-if args.version == True:
+if args.version:
     helper.getVersion()
     exit()
 
 
 def install():
     #youtube_dl options
-    ydlOpts = {
-        'format': 'bestaudio/best',
-        "outtmpl": "downloads/%(title)s.%(ext)s",
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        "logger": helper.Logger(),
-        "progress_hooks": [helper.myHook],
-    }
+    ydlOpts = helper.ydlOpts
+    if args.quite:
+        ydlOpts["quiet"] = True
+        ydlOpts.pop("logger")
+        ydlOpts.pop("progress_hooks")
     url = helper.urlReader()
 
     #Downloads the youtube url 
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
         if args.no_download:
             for urlIndex in url:
-                ydl.extract_info(urlIndex, download=True)
+                ydl.extract_info(urlIndex, download=False)
         else:
             ydl.download(url)
 
 
 
-def download():
+def download(quite=False):
     if args.ignore == False:
         if helper.checkIfConfigEmpty():
             helper.WARNING("Config file is empty")
             helper.onelineInfo("Please add your credentials to the config file")
             return
-        if helper.checkForConfigBlanks() == True:
+        if helper.checkForConfigBlanks():
             helper.ERROR("config.json is missing some values")
             return
     # reads the config.json file and loads the fields into variables
@@ -69,27 +63,31 @@ def download():
     if len(allSongs) == 0:
         if args.no_color == False:
             helper.ERROR("No songs to download")
-        elif args.no_color == True:
+        elif args.no_color:
             helper.ncERROR("No songs to download")
-            
-        elif args.ignore == True:
+        elif args.ignoreTrue:
             return 
     else:
         for i, song in enumerate(allSongs):
             if song in helper.debugSongs:
                 allSongs.remove(song)
 
-            print(f"[{i+1}/{len(allSongs)}] {song}")
+            if quite == False:
+                print(f"[{i+1}/{len(allSongs)}] {song}")
             try:
                 mail.send(sender, password, receiver, f"downloads/{song}", f"{song}", f"{song}")
             except smtplib.SMTPRecipientsRefused as traceback:
+                if args.ignore:
+                    exit()
                 helper.ERROR(f"{receiver} is not a valid email address", traceback)
                 exit()
             except smtplib.SMTPAuthenticationError as traceback:
+                if args.ignore:
+                    exit()
                 helper.ERROR("Invalid username or password",traceback)
                 exit()
         if helper.isDebug() == False:
-            helper.emptyURLfile()
+            helper.emptyUrlFile()
 
 
 install()

@@ -21,7 +21,7 @@ def send(sender:str, password:str, receiver:str, attachment, subject="Title", bo
     
     Console().print("[bold green]Email sent![/bold green]")
     mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-    if debug == True:
+    if debug:
         mail_server.set_debuglevel(1)
     mail_server.login(sender, password)
     mail_server.send_message(message)

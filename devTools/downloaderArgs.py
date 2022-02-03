@@ -26,3 +26,9 @@ parser.add_argument(
     dest="no_color",
     action="store_true"
 )
+parser.add_argument(
+    "--quite", "-q",
+    help="Don't print anything",
+    dest="quite",
+    action="store_true"
+)

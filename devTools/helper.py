@@ -22,11 +22,13 @@ def getVersion():
         returnMessage = f"[bold yellow]VERSION: {version}[/bold yellow]"
     console.print(returnMessage)
 
+
 ########## TKINTER ##########
+
 def deleteEntries(fields):
     fields.delete("1.0", tk.END)
 
-########## LOGGING ##########
+########## YouTube-dl ##########
 
 class Logger(object):
     def debug(self, msg):
@@ -44,7 +46,33 @@ def myHook(d:dict):
         print(f"downloaded \"{d['filename'].split('/')[-1]}\" to downloads/")
     if d['status'] == 'downloading':
         print(f"Downloading \"{d['filename'].split('/')[-1]}\" [{d['_percent_str']}] [{d['_eta_str']}]", end='\r')
-    
+
+ydlOpts = {
+        "format": "bestaudio/best",
+        "outtmpl": "downloads/%(title)s.%(ext)s",
+        "extractaudio": True,
+        "addmetadata": True,
+        "writethumbnail": True,
+        "logger": Logger(),
+        "progress_hooks": [myHook],
+        "postprocessors": [{
+            "key": "FFmpegExtractAudio",
+            "preferredcodec": "mp3",
+            "preferredquality": "192",
+        },
+            {"key": "FFmpegMetadata"},
+            {"key": "EmbedThumbnail"},
+        ],
+    }
+########## STRING MANIPULATION ##########
+def usefullMetaData(url):
+    returns = []
+    with youtube_dl.YoutubeDL(ydlOpts) as ydl:
+        data = ydl.extract_info(url, download=False)
+        returns.append(data["track"])
+        returns.append(data["artist"])
+        returns.append(data["thumbnail"])
+        return returns
 ########## CHECKS ##########
 
 def urlIsValid(url:str):
@@ -54,13 +82,20 @@ def urlIsValid(url:str):
 	else:
 		return False
 
+# def checkForCommentInUrlFile():
+#     with open(urlsPath, "r") as urls:
+#         for i,line in enumerate(urls.readlines()):
+#             if line.startswith("#"):
+#                 return i+1
+#     return False
 def checkForCommentInUrlFile():
-    with open(urlsPath, "r") as urls:
-        for i,line in enumerate(urls.readlines()):
-            if line.startswith("#"):
-                return f"Comment found in line {i+1} of urls.txt"
-    return False
-
+    with open(urlsPath, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            if "#" in line:
+                return True
+            else:
+                return False
 def checkBadLURLS():
     with open(urlsPath, "r") as urlFile:
         lines = urlFile.readlines()
@@ -105,7 +140,7 @@ def getAllDownloads():
 def emptyDownloadsFolder(choice=True):
     for _, _,files in os.walk(downloadsPath):
         for file in files:
-            if choice == True:
+            if choice:
                 os.remove(os.path.join(downloadsPath,file))
             
 def removeEmptyLines():
@@ -119,10 +154,35 @@ def removeEmptyLines():
         for gLine in goodLines:
             urlFile.write(gLine)
 
-def emptyURLfile():
-    with open(urlsPath, "w") as urlFile:
-        urlFile.write("")
+def emptyUrlFile(): #TODO: REFACTOR!!!!!!
+    with open("urls.txt", "r") as f:
+        lines = f.readlines()
+    with open("urls.txt", "w") as f:
+        for line in lines:
+            if "#" in line:
+                f.write(line.strip())
+    with open("urls.txt", "r") as f:
+        lines = f.readlines()
         
+    with open("urls.txt", "r") as f:
+        linesToWrite = []
+        for line in lines:
+            if "#" in line:
+                linesToWrite.append(line.replace("#", "\n#"))
+    with open("urls.txt", "w") as f:
+        for line in linesToWrite:
+            f.write(line)
+    with open("urls.txt", "r") as f:
+        lines = f.readlines()
+    with open("urls.txt", "w") as f:
+        moreLines=[]
+        for line in lines:
+            if line != "\n":
+                moreLines.append(line)
+        f.write("".join(moreLines))
+
+    
+
 def getPassword():
     dotenv.load_dotenv()
     return os.getenv("PASSWORD")
