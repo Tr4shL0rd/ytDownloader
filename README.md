@@ -4,18 +4,18 @@
 * python downloader.py (downloads each video in the urls.txt file)
 
 
-
-# RESOURCES
-* https://www.flaticon.com/
-
-
-# TODO (CLI)
+# TODO 
+## General
+* add multiple files in one email
 * Prettify song titles
+## CLI
 * --json
 * stderr for errors
 * grep-able output
-# TODO (GUI)
+## GUI
 * convert to executable
 * add radio buttons to toggle reading from file
 
 
+# RESOURCES
+* https://www.flaticon.com/
