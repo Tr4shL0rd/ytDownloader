@@ -188,26 +188,26 @@ def removeEmptyLines():
             urlFile.write(gLine)
 
 def emptyUrlFile(): #TODO: REFACTOR!!!!!!
-    with open("urls.txt", "r") as f:
+    with open(urlsPath, "r") as f:
         lines = f.readlines()
-    with open("urls.txt", "w") as f:
+    with open(urlsPath, "w") as f:
         for line in lines:
             if "#" in line:
                 f.write(line.strip())
-    with open("urls.txt", "r") as f:
+    with open(urlsPath, "r") as f:
         lines = f.readlines()
         
-    with open("urls.txt", "r") as f:
+    with open(urlsPath, "r") as f:
         linesToWrite = []
         for line in lines:
             if "#" in line:
                 linesToWrite.append(line.replace("#", "\n#"))
-    with open("urls.txt", "w") as f:
+    with open(urlsPath, "w") as f:
         for line in linesToWrite:
             f.write(line)
-    with open("urls.txt", "r") as f:
+    with open(urlsPath, "r") as f:
         lines = f.readlines()
-    with open("urls.txt", "w") as f:
+    with open(urlsPath, "w") as f:
         moreLines=[]
         for line in lines:
             if line != "\n":

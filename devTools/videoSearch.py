@@ -17,12 +17,12 @@ def searchVideo(search, verbose=False):
             print(f"{k}: {v}")
         return hits
     else:
-        return hits["link"]
+        return hits["Link"]
 
 if args.search:
     result = searchVideo(args.search, verbose=args.verbose)
 else:
     result = searchVideo(input("Search: "), verbose=args.verbose)
     
-with open("devTools/urls.txt", "w") as f:
-    f.write(result["Link"])
+with open("devTools/urls.txt", "a") as f:
+    f.writelines(f"{result}\n")
