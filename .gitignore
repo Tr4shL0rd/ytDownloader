@@ -6,4 +6,3 @@ config.json
 downloads/*
 build/*
 devTools/urls.txt
-repoUpdateChecker.py
