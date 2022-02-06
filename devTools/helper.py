@@ -88,6 +88,7 @@ def fixSongNames(songs:list):
         "(official video)",
         "[Live at Improve Tone Studios, 2015]",
         "[HD]",
+        "[Official Lyric Video]"
         ]
     exts = [
         ".mp3", 
