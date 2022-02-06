@@ -30,6 +30,7 @@ labelFont = ("Helvetica", 12)
 def dump(sender, reciever, password, url):
     print(sender, reciever, password, url)
 
+
 class download_Button():
     download_Button_icon = tk.PhotoImage(file="./assets/buttons/download.png")
 
@@ -45,12 +46,13 @@ class download_Button():
         text="Download",
         compound=tk.LEFT,
         command=lambda: guiHelper.download(
-            sender     = getEntrie.sender(), 
-            reciever   = getEntrie.reciever(), 
-            password   = getEntrie.password(),
-            attachment = url_Field.url_Field_Text.get()
+            sender=getEntrie.sender(),
+            reciever=getEntrie.reciever(),
+            password=getEntrie.password(),
+            attachment=url_Field.url_Field_Text.get()
         )
     )
+
 
 class sender_Field:
     def __init__(self):
@@ -63,10 +65,12 @@ class sender_Field:
     sender_Field_Text = tk.Entry(
         root,
     )
+
+
 class reciever_Field:
     def __init__(self):
         pass
-    
+
     reciever_Field_Label = tk.Label(
         root,
         text="RECIEVER",
@@ -76,10 +80,11 @@ class reciever_Field:
         root,
     )
 
+
 class password_Field:
     def __init__(self):
         pass
-    
+
     password_Field_Label = tk.Label(
         root,
         text="PASSWORD",
@@ -87,13 +92,13 @@ class password_Field:
     )
     password_Field_Text = tk.Entry(
         root,
-        #show="*"
+        # show="*"
     )
+
 
 class url_Field:
     def __init__(self):
         pass
-    
 
     url_Field_Text_Label = tk.Label(
         root,
@@ -105,11 +110,13 @@ class url_Field:
         root,
         textvariable=url,
     )
-    
+
     url_Field_Commit = tk.Button(
         root,
         text="Download",
     )
+
+
 class load_Url_File:
     def __init__(self):
         pass
@@ -120,22 +127,26 @@ class load_Url_File:
         variable=loadFromFile,
         command=lambda: print(load_Url_File.loadFromFile.get())
     )
-    
+
+
 class remeber_Me:
     def __init__(self):
         pass
-    
+
     def saveCreds():
         print(remeber_Me.remeber.get())
         if remeber_Me.remeber.get():
-            guiHelper.saveToConfig(senderName=sender_Field.sender_Field_Text.get(), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
+            guiHelper.saveToConfig(senderName=sender_Field.sender_Field_Text.get(
+            ), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
     remeber = BooleanVar()
     remeber_Me_Button = tk.Checkbutton(
         root,
         text="Remember Me",
         variable=remeber,
-        command=lambda: guiHelper.saveToConfig(senderName=getEntrie.sender(), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
+        command=lambda: guiHelper.saveToConfig(senderName=getEntrie.sender(
+        ), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
     )
+
 
 class general:
     def __init__(self):
@@ -146,36 +157,46 @@ class general:
         text="DEBUG"
     )
 
+
 sender_Field.sender_Field_Label.grid(column=0, row=0, sticky=tk.W)
 sender_Field.sender_Field_Text.grid(column=0, row=1, sticky=tk.W)
-sender_Field.sender_Field_Text.insert(0, json.loads(open("config.json").read())["username"])
+sender_Field.sender_Field_Text.insert(
+    0, json.loads(open("config.json").read())["username"])
 
 reciever_Field.reciever_Field_Label.grid(column=1, row=0, sticky=tk.W)
 reciever_Field.reciever_Field_Text.grid(column=1, row=1, sticky=tk.W)
-reciever_Field.reciever_Field_Text.insert(0, json.loads(open("config.json").read())["receiver"])
+reciever_Field.reciever_Field_Text.insert(
+    0, json.loads(open("config.json").read())["receiver"])
 
 password_Field.password_Field_Label.grid(column=2, row=0, sticky=tk.W)
 password_Field.password_Field_Text.grid(column=2, row=1, sticky=tk.W)
-password_Field.password_Field_Text.insert(0, json.loads(open("config.json").read())["password"])
+password_Field.password_Field_Text.insert(
+    0, json.loads(open("config.json").read())["password"])
 
 url_Field.url_Field_Text_Label.grid(column=1, row=2, sticky=tk.W)
 url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
 
 download_Button.download_Button_Butt.grid(column=1, row=4, sticky=tk.W, padx=5)
 load_Url_File.load_Url_File_Button.grid(column=1, row=5, sticky=tk.W)
-remeber_Me.remeber_Me_Button.grid(column=1,row=6, sticky=tk.W)
+remeber_Me.remeber_Me_Button.grid(column=1, row=6, sticky=tk.W)
+
+
 class getEntrie():
     def url():
         return url_Field.url_Field_Text.get()
+
     def sender():
         return sender_Field.sender_Field_Text.get()
+
     def reciever():
         return reciever_Field.reciever_Field_Text.get()
+
     def password():
         return password_Field.password_Field_Text.get()
+
+
 def getRadioButtonValue():
     return load_Url_File.load_Url_File_Button.get()
-
 
 
 try:
