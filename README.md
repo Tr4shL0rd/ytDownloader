@@ -87,7 +87,7 @@ cd build/exe."PLATFORM"
 
 * [✓]add "Remember Me" check box in gui
 * [✓]convert to executable
-* add check box to toggle reading from file
+* [✓]add check box to toggle reading from file
 
 # RESOURCES
 
