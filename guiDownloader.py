@@ -45,9 +45,9 @@ class download_Button():
         text="Download",
         compound=tk.LEFT,
         command=lambda: guiHelper.download(
-            sender     = getEntrie.sender(),#json.loads(open("config.json").read())["username"], 
-            reciever   = getEntrie.reciever(),#json.loads(open("config.json").read())["receiver"], 
-            password   = getEntrie.password(),#json.loads(open("config.json").read())["password"],
+            sender     = getEntrie.sender(), 
+            reciever   = getEntrie.reciever(), 
+            password   = getEntrie.password(),
             attachment = url_Field.url_Field_Text.get()
         )
     )
@@ -109,7 +109,6 @@ class url_Field:
     url_Field_Commit = tk.Button(
         root,
         text="Download",
-        #command=lambda: print(url_Field.url_Field_Text.get())
     )
 class load_Url_File:
     def __init__(self):
