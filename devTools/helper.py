@@ -11,9 +11,11 @@ from rich.console import Console
 
 ########## GLOBALS ##########
 
-home = os.path.expanduser("~")
-urlsPath = os.path.abspath(os.path.join(os.path.dirname(__file__), "urls.txt"))
-downloadsPath  = os.path.abspath(os.path.join(os.path.dirname(__file__),"..", "downloads"))
+home          = os.path.expanduser("~")
+urlsPath      = os.path.abspath(os.path.join(os.path.dirname(__file__), "urls.txt"))
+downloadsPath = os.path.abspath(os.path.join(os.path.dirname(__file__),"..", "downloads"))
+configPath    = os.path.abspath(os.path.join(os.path.dirname(__file__),"..", "config.json"))
+
 debugSongs = ["youtube-dl test video ''_ä↭𝕐.mp3"] 
 def getVersion():
     version = "0.5.0"

@@ -1,4 +1,6 @@
+import configparser
 import json
+import os.path
 import smtplib
 import mimetypes
 import youtube_dl
@@ -12,14 +14,15 @@ from email.message import EmailMessage
 def deleteEntries(fields):
     fields.delete("1.0", tk.END)
 
-def saveToConfig(senderName, senderPassword, reciever):    
-    with open("../config.json", "w") as configFile:
+def saveToConfig(senderName, senderPassword, reciever):   
+    configPath = os.path.join(os.path.dirname(__file__), "..","config.json")
+    with open(configPath, "w") as configFile:
         json.dump(
             {
                 "username": senderName, 
                 "password": senderPassword, 
                 "receiver": reciever, 
-                "written": True
+                "written":  True
             }, 
             configFile
         )

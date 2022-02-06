@@ -2,7 +2,7 @@ import os
 import json
 import signal
 import tkinter as tk
-from tkinter import StringVar, ttk
+from tkinter import StringVar, BooleanVar, IntVar, Variable, ttk
 import tkinter.messagebox as messagebox
 import guiDevTools.guiHelper as guiHelper
 
@@ -113,13 +113,28 @@ class url_Field:
 class load_Url_File:
     def __init__(self):
         pass
-    
-    load_Url_File_Button = tk.Radiobutton(
+    loadFromFile = BooleanVar()
+    load_Url_File_Button = tk.Checkbutton(
         root,
         text="Load from file",
-        value=1,
-        variable=1,
-        command=lambda: print("Load from file")
+        variable=loadFromFile,
+        command=lambda: print(load_Url_File.loadFromFile.get())
+    )
+    
+class remeber_Me:
+    def __init__(self):
+        pass
+    
+    def saveCreds():
+        print(remeber_Me.remeber.get())
+        if remeber_Me.remeber.get():
+            guiHelper.saveToConfig(senderName=sender_Field.sender_Field_Text.get(), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
+    remeber = BooleanVar()
+    remeber_Me_Button = tk.Checkbutton(
+        root,
+        text="Remember Me",
+        variable=remeber,
+        command=lambda: guiHelper.saveToConfig(senderName=getEntrie.sender(), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
     )
 
 class general:
@@ -148,7 +163,7 @@ url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
 
 download_Button.download_Button_Butt.grid(column=1, row=4, sticky=tk.W, padx=5)
 load_Url_File.load_Url_File_Button.grid(column=1, row=5, sticky=tk.W)
-
+remeber_Me.remeber_Me_Button.grid(column=1,row=6, sticky=tk.W)
 class getEntrie():
     def url():
         return url_Field.url_Field_Text.get()
