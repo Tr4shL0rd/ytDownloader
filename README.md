@@ -92,3 +92,4 @@ cd build/exe."PLATFORM"
 # RESOURCES
 
 * <https://www.flaticon.com/>
+* <https://img.shields.io/>
