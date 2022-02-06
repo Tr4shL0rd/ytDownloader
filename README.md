@@ -75,7 +75,7 @@ cd build/exe."PLATFORM"
 ## General
 
 * add multiple files in one email
-* Prettify song titles
+* [✓]Prettify song titles
 
 ## CLI
 
