@@ -11,5 +11,5 @@ setup(
     options     = {"build_exe": {"include_files": includeFiles}},
     version     = "0.1",
     description = "A GUI for youtube-dl",
-    executables = [Executable(script="guiDownloader.py", icon="assets/icon/icon.ico")]
+    executables = [target]
     )
