@@ -10,6 +10,8 @@
 git clone https://github.com/Tr4shL0rd/ytDownloader.git
 pip install -r requirements.txt
 python guiSetup.py build
+cd build/exe."PLATFORM"
+./guiDownloader.exe
 ```
 
 # TODO
