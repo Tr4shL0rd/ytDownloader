@@ -5,7 +5,6 @@ import tkinter as tk
 from tkinter import StringVar, ttk
 import tkinter.messagebox as messagebox
 import guiDevTools.guiHelper as guiHelper
-print("PID:",os.getpgid(0))
 
 print(json.loads(open("config.json").read())["username"])
 print(json.loads(open("config.json").read())["password"])
@@ -46,9 +45,9 @@ class download_Button():
         text="Download",
         compound=tk.LEFT,
         command=lambda: guiHelper.download(
-            sender     = json.loads(open("config.json").read())["username"], 
-            reciever   = json.loads(open("config.json").read())["receiver"], 
-            password   = json.loads(open("config.json").read())["password"],
+            sender     = getEntrie.sender(),#json.loads(open("config.json").read())["username"], 
+            reciever   = getEntrie.reciever(),#json.loads(open("config.json").read())["receiver"], 
+            password   = getEntrie.password(),#json.loads(open("config.json").read())["password"],
             attachment = url_Field.url_Field_Text.get()
         )
     )
@@ -88,7 +87,7 @@ class password_Field:
     )
     password_Field_Text = tk.Entry(
         root,
-        show="*"
+        #show="*"
     )
 
 class url_Field:
@@ -110,7 +109,7 @@ class url_Field:
     url_Field_Commit = tk.Button(
         root,
         text="Download",
-        command=lambda: print(url_Field.url_Field_Text.get())
+        #command=lambda: print(url_Field.url_Field_Text.get())
     )
 class load_Url_File:
     def __init__(self):
