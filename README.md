@@ -4,7 +4,33 @@
 ![GitHub last commit](https://img.shields.io:/github/last-commit/Tr4shL0rd/ytDownloader?style=for-the-badge)
 ![GitHub](https://img.shields.io:/github/license/Tr4shL0rd/ytDownloader?style=for-the-badge)
 
-# BUILD
+
+# INSTALLATION
+
+* [Manjaro](README.md#Manjaro)
+* [macOS](README.md#macOS)
+* [Windows](README.md#Windows)
+
+# Manjaro
+
+``` linux
+yay python3.10
+yay python-tk@3.10
+```
+
+# macOS
+
+``` mac
+brew install python3.10
+brew install python-tk@3.10
+```
+
+# Windows
+
+* install python from https://www.python.org/downloads/
+* Tkinter Comes With python3.7 & Greater 
+
+## BUILD
 
 ``` _
 git clone https://github.com/Tr4shL0rd/ytDownloader.git
@@ -14,6 +40,8 @@ cd build/exe."PLATFORM"
 ./guiDownloader.exe
 ```
 
+
+  
 # TODO
 
 ## General
