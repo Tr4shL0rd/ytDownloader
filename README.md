@@ -85,6 +85,7 @@ cd build/exe."PLATFORM"
 
 ## GUI
 
+* Show progress in GUI window
 * [✓]add "Remember Me" check box in gui
 * [✓]convert to executable
 * [✓]add check box to toggle reading from file
