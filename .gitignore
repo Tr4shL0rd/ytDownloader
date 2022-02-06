@@ -2,7 +2,7 @@
 devTools/functionTester.py
 devTools/__pycache__
 __pycache__
-devTools/functionTester.py
 config.json
 downloads/*
+build/*
 devTools/urls.txt

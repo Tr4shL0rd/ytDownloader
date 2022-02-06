@@ -84,6 +84,8 @@ def fixSongNames(songs:list):
         "(video)",
         "(music video)",
         "(official video)",
+        "[Live at Improve Tone Studios, 2015]",
+        "[HD]",
         ]
     exts = [
         ".mp3", 
@@ -103,7 +105,6 @@ def fixSongNames(songs:list):
             if word in song.lower():
                 song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ")
                 fixedSongNames.append(song)
-    
     return fixedSongNames
 
 ########## CHECKS ##########
@@ -115,12 +116,6 @@ def urlIsValid(url:str):
 	else:
 		return False
 
-# def checkForCommentInUrlFile():
-#     with open(urlsPath, "r") as urls:
-#         for i,line in enumerate(urls.readlines()):
-#             if line.startswith("#"):
-#                 return i+1
-#     return False
 def checkForCommentInUrlFile():
     with open(urlsPath, "r") as f:
         lines = f.readlines()

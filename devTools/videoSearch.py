@@ -15,7 +15,7 @@ def searchVideo(search, verbose=False):
     if verbose:
         for k,v in hits.items():
             print(f"{k}: {v}")
-        return hits
+        return hits["Link"]
     else:
         return hits["Link"]
 
