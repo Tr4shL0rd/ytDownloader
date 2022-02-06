@@ -5,17 +5,14 @@ import tkinter as tk
 from tkinter import StringVar, BooleanVar, IntVar, Variable, ttk
 import tkinter.messagebox as messagebox
 import guiDevTools.guiHelper as guiHelper
-
-print(json.loads(open("config.json").read())["username"])
-print(json.loads(open("config.json").read())["password"])
-print(json.loads(open("config.json").read())["receiver"])
+import devTools.helper as helper
 
 # ROOT MANAGEMENT
 root = tk.Tk()
 root.geometry("500x200")
 root.resizable(False, False)
 root.title("YouTube Downloader")
-
+root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file='assets/icon/icon.ico'))
 # FRAME MANAGEMENT
 frame = tk.Frame(root)
 
@@ -121,11 +118,19 @@ class url_Field:
 class load_Url_File:
     def __init__(self):
         pass
+    urlCount = tk.Label(
+                root,
+                text=f"{len(helper.urlReader())} songs loaded",
+                font=labelFont
+            )
     def loadFromUrlClicked():
         if load_Url_File.loadFromFile.get():
+            
+            load_Url_File.urlCount.grid(row=2, column=1, sticky=tk.W)
             url_Field.url_Field_Text_Label.grid_remove()
             url_Field.url_Field_Text.grid_remove()
         else:
+            load_Url_File.urlCount.grid_remove()
             url_Field.url_Field_Text_Label.grid(column=1, row=2, sticky=tk.W)
             url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
     loadFromFile = BooleanVar()

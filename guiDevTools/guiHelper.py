@@ -30,6 +30,7 @@ ydlOpts = {
         "outtmpl": "downloads/%(title)s.%(ext)s",
         "extractaudio": True,
         "addmetadata": True,
+        "quiet": True,
         "writethumbnail": True,
         "ffmpeg_location": os.path.join(os.path.dirname(__file__), "..", "winFFmpegBins"),
         "postprocessors": [{
@@ -43,9 +44,12 @@ ydlOpts = {
     }
 
 def install(url):
-    
-    with youtube_dl.YoutubeDL(ydlOpts) as ydl:
-        ydl.download([url])
+    try:     
+        with youtube_dl.YoutubeDL(ydlOpts) as ydl:
+            ydl.download([url])
+    except youtube_dl.utils.DownloadError as e:
+        print("possible http error code 403\n", e)
+
     
 
 def download(sender, reciever, password, attachment, loadedFromFile=False):
@@ -68,24 +72,25 @@ def download(sender, reciever, password, attachment, loadedFromFile=False):
 
 
 def send(sender:str, password:str, receiver:str, attachment, subject="Title", body="Body", debug=False):
-    print(attachment)
-    message = EmailMessage()
-    message['From'] = sender
-    message['To'] = receiver
-    message['Subject'] = subject
+    try:
+        message = EmailMessage()
+        message['From'] = sender
+        message['To'] = receiver
+        message['Subject'] = subject
 
-    message.set_content(body)
-    mime_type, _ = mimetypes.guess_type(attachment)
-    mime_type, mime_subtype = mime_type.split('/')
-    with open(f"{attachment}", 'rb') as file:
-        message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype, filename=attachment.split('/')[-1])
-    mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-    if debug:
-        mail_server.set_debuglevel(1)
-    mail_server.login(sender, password)
-    mail_server.send_message(message)
-    mail_server.quit()
-    print("Email sent!")
-
+        message.set_content(body)
+        mime_type, _ = mimetypes.guess_type(attachment)
+        mime_type, mime_subtype = mime_type.split('/')
+        with open(f"{attachment}", 'rb') as file:
+            message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype, filename=attachment.split('/')[-1])
+        mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
+        if debug:
+            mail_server.set_debuglevel(1)
+        mail_server.login(sender, password)
+        mail_server.send_message(message)
+        mail_server.quit()
+        print("Email sent!")
+    except AttributeError as e:
+        print("Mimetype error", e)
 
 
