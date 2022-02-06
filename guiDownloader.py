@@ -46,10 +46,11 @@ class download_Button():
         text="Download",
         compound=tk.LEFT,
         command=lambda: guiHelper.download(
-            sender=getEntrie.sender(),
-            reciever=getEntrie.reciever(),
-            password=getEntrie.password(),
-            attachment=url_Field.url_Field_Text.get()
+            sender         = getEntrie.sender(),
+            reciever       = getEntrie.reciever(),
+            password       = getEntrie.password(),
+            attachment     = getEntrie.url(),
+            loadedFromFile = load_Url_File.loadFromFile.get()
         )
     )
 
@@ -120,12 +121,19 @@ class url_Field:
 class load_Url_File:
     def __init__(self):
         pass
+    def loadFromUrlClicked():
+        if load_Url_File.loadFromFile.get():
+            url_Field.url_Field_Text_Label.grid_remove()
+            url_Field.url_Field_Text.grid_remove()
+        else:
+            url_Field.url_Field_Text_Label.grid(column=1, row=2, sticky=tk.W)
+            url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
     loadFromFile = BooleanVar()
     load_Url_File_Button = tk.Checkbutton(
         root,
         text="Load from file",
         variable=loadFromFile,
-        command=lambda: print(load_Url_File.loadFromFile.get())
+        command=lambda: load_Url_File.loadFromUrlClicked()
     )
 
 
@@ -134,17 +142,22 @@ class remeber_Me:
         pass
 
     def saveCreds():
-        print(remeber_Me.remeber.get())
         if remeber_Me.remeber.get():
-            guiHelper.saveToConfig(senderName=sender_Field.sender_Field_Text.get(
-            ), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
+            guiHelper.saveToConfig(
+                senderName=    getEntrie.sender(),
+                reciever=      getEntrie.reciever(),
+                senderPassword=getEntrie.password()
+            )
     remeber = BooleanVar()
     remeber_Me_Button = tk.Checkbutton(
         root,
         text="Remember Me",
         variable=remeber,
-        command=lambda: guiHelper.saveToConfig(senderName=getEntrie.sender(
-        ), reciever=getEntrie.reciever(), senderPassword=getEntrie.password())
+        command=lambda: guiHelper.saveToConfig(
+            senderName=    getEntrie.sender(),
+            reciever=      getEntrie.reciever(),
+            senderPassword=getEntrie.password()
+        )
     )
 
 

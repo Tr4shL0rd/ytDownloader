@@ -1,11 +1,9 @@
-import configparser
 import json
 import os.path
 import smtplib
 import mimetypes
 import youtube_dl
 import tkinter as tk
-import devTools.mail as mail
 import devTools.helper as helper
 from email.message import EmailMessage
 
@@ -33,6 +31,7 @@ ydlOpts = {
         "extractaudio": True,
         "addmetadata": True,
         "writethumbnail": True,
+        "ffmpeg_location": os.path.join(os.path.dirname(__file__), "..", "winFFmpegBins"),
         "postprocessors": [{
             "key": "FFmpegExtractAudio",
             "preferredcodec": "mp3",
@@ -49,11 +48,18 @@ def install(url):
         ydl.download([url])
     
 
-def download(sender, reciever, password, attachment):
+def download(sender, reciever, password, attachment, loadedFromFile=False):
     try:
-        install(attachment)
-        filename = helper.getAllDownloads()[0]
-        send(sender, password, reciever, attachment=f"downloads/{filename}", subject=filename, body=filename)
+        if loadedFromFile:
+            songs = helper.urlReader()
+            for song in songs:
+                install(song)
+            filename = helper.getAllDownloads()
+            for song in filename:
+                send(sender, password, reciever, attachment=f"downloads/{song}", subject=song, body=song)
+        else:
+            filename = helper.getAllDownloads()[0]
+            send(sender, password, reciever, attachment=f"downloads/{filename}", subject=filename, body=filename)
     except smtplib.SMTPRecipientsRefused as e:
         print(e)
     except smtplib.SMTPAuthenticationError as e:
@@ -73,9 +79,6 @@ def send(sender:str, password:str, receiver:str, attachment, subject="Title", bo
     mime_type, mime_subtype = mime_type.split('/')
     with open(f"{attachment}", 'rb') as file:
         message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype, filename=attachment.split('/')[-1])
-    
-    
-    #helper.emptyDownloadsFolder()
     mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
     if debug:
         mail_server.set_debuglevel(1)
