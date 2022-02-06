@@ -3,11 +3,17 @@
 ![GitHub last commit](https://img.shields.io:/github/last-commit/Tr4shL0rd/ytDownloader?style=for-the-badge)
 ![GitHub](https://img.shields.io:/github/license/Tr4shL0rd/ytDownloader?style=for-the-badge)
 
-# USAGE
+<!--# USAGE
 * python wizard.py (sets up the required sender, receiver, and password for the program to work)
 * python urlAppender.py --url URL (or manually add each url to devTools/urls.txt)
 * python downloader.py (downloads each video in the urls.txt file)
-
+-->
+# BUILD
+```
+git clone https://github.com/Tr4shL0rd/ytDownloader.git
+pip install -r requirements.txt
+python guiSetup.py build
+```
 
 # TODO 
 ## General
