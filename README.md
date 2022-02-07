@@ -78,23 +78,23 @@ cd build/exe."PLATFORM"
 
 
 # Doing
-> -   add multiple files in one email
+-   add multiple files in one email
 
 # Need To Have
 
 ## CLI
 
-> -   --json
+-   --json
 
 # Nice To Have
 
 ## CLI
 
-> -   stderr for errors
+-   stderr for errors
 
 ## GUI
 
-> -   progress bar in GUI
+-   progress bar in GUI
 
 ## General
 
@@ -106,23 +106,23 @@ cd build/exe."PLATFORM"
 
 ## CLI
 
-> ### ARGS
+### ARGS
 
-> -   [✓] --ignore
-> -   [✓] --no-download
-> -   [✓] --version
-> -   [✓] --no-color
-> -   [✓] --quite 
+-   [✓] --ignore
+-   [✓] --no-download
+-   [✓] --version
+-   [✓] --no-color
+-   [✓] --quite 
 
 ## GUI
 
-> -   [✓] add "Remember Me" check box in gui
-> -   [✓] convert to executable
-> -   [✓] add check box to toggle reading from file
+-   [✓] add "Remember Me" check box in gui
+-   [✓] convert to executable
+-   [✓] add check box to toggle reading from file
 
 ## GENERAL
 
-> -   [✓] Prettify song titles
+-   [✓] Prettify song titles
 
 ----
 
