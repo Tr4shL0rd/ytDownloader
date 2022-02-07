@@ -142,7 +142,7 @@ cd build/exe."PLATFORM"
 
 -   [✓] Prettify song titles
 
----
+
 
 
 
