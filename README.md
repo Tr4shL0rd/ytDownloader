@@ -4,9 +4,18 @@
 ![GitHub](https://img.shields.io:/github/license/Tr4shL0rd/ytDownloader?style=for-the-badge)
 
 # CONTENTS
-- [Installation](#INSTALLATION)
-- [Build](#BUILD)
-- [TODO](#DOING)
+
+-   [Description](#DESCRIPTION)
+-   [Installation](#INSTALLATION)
+-   [Build](#BUILD)
+-   [Todo](#DOING)
+-   [Resources](#RESOURCES)
+-   [Known Bugs](#BUGS)
+
+
+# DESCRIPTION
+
+**ytDownloader** is a Command-line / graphical user interface application written in python3.10 that downloads a youtube video from a url and converts it into a audio file and sends that file to your email address.
 
 # INSTALLATION
 
@@ -75,26 +84,26 @@ cd build/exe."PLATFORM"
 ./guiDownloader.exe
 ```
 
+# DOING
 
-
-# Doing
 -   add multiple files in one email
 
-# Need To Have
+# NEED TO HAVE
 
 ## CLI
 
 -   --json
 
-# Nice To Have
+# NICE TO HAVE
 
-## CLI
+## cli
 
 -   stderr for errors
 
-## GUI
+## gui
 
 -   progress bar in GUI
+-   all entries and button stays in the same place no matter if the url entry box is there or not
 
 ## General
 
@@ -104,27 +113,32 @@ cd build/exe."PLATFORM"
 
 # DONE
 
-## CLI
+## Cli
 
-### ARGS
+### Args
 
 -   [✓] --ignore
 -   [✓] --no-download
 -   [✓] --version
 -   [✓] --no-color
--   [✓] --quite 
+-   [✓] --quite
 
-## GUI
+## Gui
 
 -   [✓] add "Remember Me" check box in gui
 -   [✓] convert to executable
 -   [✓] add check box to toggle reading from file
 
-## GENERAL
+## General
 
 -   [✓] Prettify song titles
 
-----
+
+# BUGS
+* sometimes youtube-dl throws an http error code 403 when downloading a video. url get downloaded when trying to download the video again. **[Cause: unknown]**
+* When clicking the **Remeber Me** button in the gui application, the program writes to the config file when toggling the checkbox ON and OFF **[Cause: seems to be some weird logic in the if statement]**
+
+---
 
 # RESOURCES
 
