@@ -115,8 +115,6 @@ def fixSongNames(songs:list):
                 song += "{lofi}"
         song = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", song)
         song = song.replace("()", "").replace("[]", "")
-        #print(song)
-        #print("True")
         for word in blacklistWords:
             song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ").replace("{", "[").replace("}", "]")
         fixedSongNames.append(song)
