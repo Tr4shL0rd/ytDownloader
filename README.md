@@ -12,7 +12,7 @@
 -   [Build](#BUILD)
 -   [Todo](#DOING)
 -   [Known Bugs](#BUGS)
--   [Built With](#BUIlT_WITH)
+-   [Built With](#BUIlT-WITH)
 -   [Acknowledgements](#ACKNOWLEDGEMENTS)
 -   [License](#LICENSE)
 
