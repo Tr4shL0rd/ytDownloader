@@ -98,9 +98,9 @@ cd build/exe."PLATFORM"
 
 ## General
 
-> -   Google Drive for file sharing
-> -   SMS API For Google Drive Link
-> -   Icon for windows taskbar
+-   Google Drive for file sharing
+-   SMS API For Google Drive Link
+-   Icon for windows taskbar
 
 # DONE
 
