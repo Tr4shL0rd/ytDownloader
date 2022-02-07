@@ -102,13 +102,29 @@ def fixSongNames(songs:list):
         ".aac", 
         ".flv", 
     ]
+    lofiWords = [
+        "lofi",
+        "lo-fi",
+    ]
+
+    # remove blacklistWords and check if there are any empty [] after in song name and then remove them
     fixedSongNames = []
     for song in songs:
+        for lofi in lofiWords:
+            if lofi in song.lower():
+                song += "{lofi}"
+        song = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", song)
+        song = song.replace("()", "").replace("[]", "")
+        #print(song)
+        #print("True")
         for word in blacklistWords:
-            if word in song.lower():
-                song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ")
-                fixedSongNames.append(song)
+            song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ").replace("{", "[").replace("}", "]")
+        fixedSongNames.append(song)
     return fixedSongNames
+#            if word in song.lower():
+#                song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ")
+#                fixedSongNames.append(song)
+#    return fixedSongNames
 
 ########## CHECKS ##########
 
