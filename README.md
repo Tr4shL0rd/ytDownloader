@@ -15,7 +15,9 @@
 
 # DESCRIPTION
 
-**ytDownloader** is a Command-line / graphical user interface application written in python3.10 that downloads a youtube video from a url and converts it into a audio file and sends that file to your email address.
+**ytDownloader** is a Command-line / graphical user interface application based on [youtube-dl](https://github.com/ytdl-org/youtube-dl). **ytDownloader** is Written in python3.10 and allows the user to downloads a youtube video from a url and then it automatically converts it into a audio file and sends that file to your email address.
+
+**Please be aware that since this program uses gmail to send the files, you need to toggle *["Less secure app access"](https://support.google.com/accounts/answer/6010255?hl=en)* on in your gmail account settings.** *I am looking for an alternative to gmail for this project.*
 
 # INSTALLATION
 
@@ -104,12 +106,13 @@ cd build/exe."PLATFORM"
 
 -   progress bar in GUI
 -   all entries and button stays in the same place no matter if the url entry box is there or not
+-   Icon for windows taskbar
 
 ## General
 
 -   Google Drive for file sharing
 -   SMS API For Google Drive Link
--   Icon for windows taskbar
+-   Add gif that shows how to use GUI and CLI 
 
 # DONE
 
@@ -126,6 +129,7 @@ cd build/exe."PLATFORM"
 ## Gui
 
 -   [✓] add "Remember Me" check box in gui
+-   [✓] add "Load From File" check box in gui
 -   [✓] convert to executable
 -   [✓] add check box to toggle reading from file
 
@@ -145,3 +149,4 @@ cd build/exe."PLATFORM"
 -   [flaticon.com](https://www.flaticon.com/)
 -   [img.shields.io](https://img.shields.io/)
 -   [GeeksForGeeks.org](https://www.geeksforgeeks.org/)
+-   [YouTube-dl](https://github.com/ytdl-org/youtube-dl)
