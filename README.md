@@ -1,5 +1,7 @@
-![GitHub Repo stars](https://img.shields.io:/github/stars/Tr4shL0rd/ytDownloader?style=for-the-badge)
+<!-- Project Shields -->
+![GitHub contributors](https://img.shields.io:/github/contributors/Tr4shL0rd/ytDownloader?style=for-the-badge)
 ![GitHub forks](https://img.shields.io:/github/forks/Tr4shL0rd/ytDownloader?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io:/github/stars/Tr4shL0rd/ytDownloader?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io:/github/last-commit/Tr4shL0rd/ytDownloader?style=for-the-badge)
 ![GitHub](https://img.shields.io:/github/license/Tr4shL0rd/ytDownloader?style=for-the-badge)
 
@@ -9,13 +11,16 @@
 -   [Installation](#INSTALLATION)
 -   [Build](#BUILD)
 -   [Todo](#DOING)
--   [Resources](#RESOURCES)
 -   [Known Bugs](#BUGS)
+-   [Built With](#BUIlT_WITH)
+-   [Acknowledgements](#ACKNOWLEDGEMENTS)
+-   [License](#LICENSE)
+
 
 
 # DESCRIPTION
 
-**ytDownloader** is a Command-line / graphical user interface application based on [youtube-dl](https://github.com/ytdl-org/youtube-dl). **ytDownloader** is Written in python3.10 and allows the user to downloads a youtube video from a url and then it automatically converts it into a audio file and sends that file to your email address.
+**ytDownloader** is a Command-line / graphical user interface application based on [youtube-dl](https://github.com/ytdl-org/youtube-dl). The application is written in python3.10 and allows the user to downloads a youtube video from a url and then it automatically converts it into a audio file and sends that file to your email address.
 
 **Please be aware that since this program uses gmail to send the files, you need to toggle *["Less secure app access"](https://support.google.com/accounts/answer/6010255?hl=en)* on in your gmail account settings.** *I am looking for an alternative to gmail for this project.*
 
@@ -137,16 +142,29 @@ cd build/exe."PLATFORM"
 
 -   [✓] Prettify song titles
 
+---
+
+
 
 # BUGS
+
 * sometimes youtube-dl throws an http error code 403 when downloading a video. url get downloaded when trying to download the video again. **[Cause: unknown]**
 * When clicking the **Remeber Me** button in the gui application, the program writes to the config file when toggling the checkbox ON and OFF **[Cause: seems to be some weird logic in the if statement]**
 
----
+# BUILT WITH
 
-# RESOURCES
+-   [tkinter](https://docs.python.org/3/library/tkinter.html)
+-   [YouTube-dl](https://github.com/ytdl-org/youtube-dl)
+-   [Youtube Video Search](https://github.com/alexmercerind/youtube-search-python)
+-   [Rich](https://github.com/Textualize/rich)
+
+# ACKNOWLEDGEMENTS
 
 -   [flaticon.com](https://www.flaticon.com/)
 -   [img.shields.io](https://img.shields.io/)
 -   [GeeksForGeeks.org](https://www.geeksforgeeks.org/)
--   [YouTube-dl](https://github.com/ytdl-org/youtube-dl)
+-   [README.md template](https://github.com/othneildrew/Best-README-Template)
+
+# LICENSE
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
