@@ -118,6 +118,7 @@ cd build/exe."PLATFORM"
 -   Google Drive for file sharing
 -   SMS API For Google Drive Link
 -   Add gif that shows how to use GUI and CLI 
+-.  Add option to choose which audio format to convert to
 
 # DONE
 
