@@ -118,7 +118,8 @@ cd build/exe."PLATFORM"
 -   Google Drive for file sharing
 -   SMS API For Google Drive Link
 -   Add gif that shows how to use GUI and CLI 
--.  Add option to choose which audio format to convert to
+-   Add option to choose which audio format to convert to
+-   Download history
 
 # DONE
 
@@ -138,6 +139,7 @@ cd build/exe."PLATFORM"
 -   [✓] add "Load From File" check box in gui
 -   [✓] convert to executable
 -   [✓] add check box to toggle reading from file
+
 
 ## General
 
