@@ -32,6 +32,8 @@ ydlOpts = {
         "addmetadata": True,
         "quiet": True,
         "writethumbnail": True,
+        #"logger": helper.Logger(),
+        #"progress_hooks": [helper.myHook],
         "ffmpeg_location": os.path.join(os.path.dirname(__file__), "..", "winFFmpegBins"),
         "postprocessors": [{
             "key": "FFmpegExtractAudio",

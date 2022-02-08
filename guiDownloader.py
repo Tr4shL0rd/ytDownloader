@@ -27,6 +27,13 @@ labelFont = ("Helvetica", 12)
 def dump(sender, reciever, password, url):
     print(sender, reciever, password, url)
 
+class progress:
+    progress_text = tk.Label(
+        root,
+        text=f"Progress: ",
+        font=labelFont
+
+    )
 
 class download_Button():
     download_Button_icon = tk.PhotoImage(file="./assets/buttons/download.png")
@@ -197,7 +204,7 @@ url_Field.url_Field_Text.grid(column=1, row=3, sticky=tk.W)
 download_Button.download_Button_Butt.grid(column=1, row=4, sticky=tk.W, padx=5)
 load_Url_File.load_Url_File_Button.grid(column=1, row=5, sticky=tk.W)
 remeber_Me.remeber_Me_Button.grid(column=1, row=6, sticky=tk.W)
-
+#progress.progress_text.grid(column=1, row=7, sticky=tk.W)
 
 class getEntrie():
     def url():
