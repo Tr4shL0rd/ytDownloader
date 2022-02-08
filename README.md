@@ -30,7 +30,7 @@
 -   [MACOS](README.md#macOS)
 -   [WINDOWS](README.md#Windows)
 
-# linux
+# Linux
 
 ### Debian-based Linux
 
@@ -64,7 +64,7 @@ sudo yum install -y tkinter tk-devel
 pip install -r requirements.txt
 ```
 
-# macOS
+# MacOS
 
 ```mac
 brew install python3.10
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 # Windows
 
 -   install python from [python.org](https://www.python.org/downloads/)
--   Tkinter Comes With python3.7 & Greater
+-   Tkinter Comes With Python3.7 & Greater
 
 ```windows
 pip install -r requirements.txt
@@ -121,8 +121,37 @@ cd build/exe."PLATFORM"
 -   Add option to choose which audio format to convert to
 -   Download history
 
-# DONE
+<!--Table Of DONE-->
+## Done  
+<details>
+<summary>Done</summary>
+<li>
+        
+## CLI
 
+-   [✓] --ignore
+-   [✓] --no-download
+-   [✓] --version
+-   [✓] --no-color
+-   [✓] --quite
+            
+## Gui
+
+-   [✓] add "Remember Me" check box in gui
+-   [✓] add "Load From File" check box in gui
+-   [✓] convert to executable
+-   [✓] add check box to toggle reading from file
+
+
+## General
+
+-   [✓] Prettify song titles
+
+</li>
+</details>
+
+<!--
+# DONE
 ## Cli
 
 ### Args
@@ -146,7 +175,7 @@ cd build/exe."PLATFORM"
 -   [✓] Prettify song titles
 
 
-
+-->
 
 
 # BUGS
