@@ -2,10 +2,11 @@ import re
 import os
 import sys
 import json
+from textwrap import indent
 import dotenv
 import youtube_dl
+import datetime
 import tkinter as tk
-
 from inspect import currentframe
 from rich.console import Console
 
@@ -31,6 +32,16 @@ configPath = os.path.abspath(
         "..", 
         "config.json")
     )
+
+historyPath = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__), 
+        "history.json")
+    )
+
+dotenv.load_dotenv()
+
+console = Console()
 
 debugSongs = ["youtube-dl test video ''_ä↭𝕐.mp3"]
 
@@ -344,6 +355,16 @@ def DEBUG_MESSAGE(iterator=0, additionalMessage=""):
         console.print(returnMessage)
     return capture.get().strip()
 
+def writeToHistory():
+    with open(historyPath, "a") as history:
+        dataFormat = {
+            datetime.datetime.now().strftime("%B %A %H:%M:%S"): {
+                "Day": datetime.datetime.now().strftime("%d"),
+                "ID": "YoutubeUrlID",
+                "title": "YoutubeTitle",
+            }
+        }
+        history.write(f",{json.dumps(dataFormat, indent=4)}")
 
 ########## WARNINGS ##########
 
