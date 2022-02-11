@@ -16,7 +16,7 @@ if args.version:
 
 
 def install():
-    #youtube_dl options
+    #Gets the youtube-dl options from helper
     ydlOpts = helper.ydlOpts
     if args.quite:
         ydlOpts["quiet"] = True
@@ -24,7 +24,7 @@ def install():
         ydlOpts.pop("progress_hooks")
     url = helper.urlReader()
 
-    #Downloads the youtube url 
+    #Downloads the youtube url from the urls file 
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
         if args.no_download:
             for urlIndex in url:
@@ -40,6 +40,7 @@ def download(quite=False):
             helper.WARNING("Config file is empty")
             helper.onelineInfo("Please add your credentials to the config file")
             return
+        #checks if any of the config.json fields contain "___ BLANK!" 
         if helper.checkForConfigBlanks():
             helper.ERROR("config.json is missing some values")
             return
@@ -64,6 +65,7 @@ def download(quite=False):
             return 
     else:
         for i, song in enumerate(allSongs):
+            # debug song is one of the test songs 
             if song in helper.debugSongs:
                 allSongs.remove(song)
 
@@ -73,14 +75,18 @@ def download(quite=False):
                 mail.send(sender, password, receiver, f"downloads/{song}", f"{song}", f"{song}")
             except smtplib.SMTPRecipientsRefused as traceback:
                 if args.ignore:
-                    exit()
+                    return
+                    #exit()
                 helper.ERROR(f"{receiver} is not a valid email address", traceback)
-                exit()
+                #exit()
+                return
             except smtplib.SMTPAuthenticationError as traceback:
                 if args.ignore:
-                    exit()
+                    #exit()
+                    return
                 helper.ERROR("Invalid username or password",traceback)
-                exit()
+                #exit()
+                return
         if helper.isDebug() == False:
             helper.emptyUrlFile()
 
