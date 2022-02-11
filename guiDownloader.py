@@ -114,6 +114,7 @@ class url_Field:
     url_Field_Text = tk.Entry(
         root,
         textvariable=url,
+        width=20
     )
 
     url_Field_Commit = tk.Button(
