@@ -102,6 +102,8 @@ ydlOpts = {
 }
 ########## STRING MANIPULATION ##########
 
+def listToString(string:list):
+    return "".join(string)
 
 def usefullMetaData(url):
     returns = []
@@ -142,24 +144,34 @@ def fixSongNames(songs: list):
         "lofi",
         "lo-fi",
     ]
+        
 
     # remove blacklistWords and check if there are any empty [] after in song name and then remove them
     fixedSongNames = []
-    for song in songs:
+    #print(f"Original song names: {songs}")
+    if type(songs) == list: 
+        for song in songs:
+            for lofi in lofiWords:
+                if lofi in song.lower():
+                    song += "{lofi}"
+            song = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", song)
+            song = song.replace("()", "").replace("[]", "")
+            for word in blacklistWords:
+                song = song.lower().replace(word, "").replace(" ", "_").replace("_.", ".").replace(
+                    "_.", ".").replace("_", " ").replace("{", "[").replace("}", "]")
+            fixedSongNames.append(song)
+        return fixedSongNames
+    elif type(songs) == str:
         for lofi in lofiWords:
-            if lofi in song.lower():
-                song += "{lofi}"
-        song = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", song)
-        song = song.replace("()", "").replace("[]", "")
+            if lofi in songs.lower():
+                songs += "{lofi}"
+        songs = re.sub("[\(\[].*?[\)\]]", "", songs)
+        songs = songs.replace("()", "").replace("[]", "")
         for word in blacklistWords:
-            song = song.lower().replace(word, "").replace(" ", "_").replace("_.", ".").replace(
+            songs = songs.lower().replace(word, "").replace(" ", "_").replace("_.", ".").replace(
                 "_.", ".").replace("_", " ").replace("{", "[").replace("}", "]")
-        fixedSongNames.append(song)
-    return fixedSongNames
-#            if word in song.lower():
-#                song = song.lower().replace(word, "").replace(" ", "_").replace("_.",".").replace("_.",".").replace("_", " ")
-#                fixedSongNames.append(song)
-#    return fixedSongNames
+        fixedSongNames.append(songs)
+        return fixedSongNames[0]
 
 ########## CHECKS ##########
 
@@ -355,13 +367,15 @@ def DEBUG_MESSAGE(iterator=0, additionalMessage=""):
         console.print(returnMessage)
     return capture.get().strip()
 
-def writeToHistory():
+def writeToHistory(url="", id="", title="", channel=""):
     with open(historyPath, "a") as history:
         dataFormat = {
-            datetime.datetime.now().strftime("%B %A %H:%M:%S"): {
-                "Day": datetime.datetime.now().strftime("%d"),
-                "ID": "YoutubeUrlID",
-                "title": "YoutubeTitle",
+            datetime.datetime.now().strftime("%d/%m/%y"): {
+                "Time Downloaded": datetime.datetime.now().strftime("%H:%M"),
+                "URL": url,
+                "ID": id,
+                "title": title,
+                "Channel": channel,
             }
         }
         history.write(f",{json.dumps(dataFormat, indent=4)}")
