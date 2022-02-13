@@ -100,6 +100,10 @@ cd build/exe."PLATFORM"
 ## CLI
 
 -   --json
+## General
+
+-   Append to json file 
+-   Add to URL list remotely
 
 # NICE TO HAVE
 
@@ -119,7 +123,7 @@ cd build/exe."PLATFORM"
 -   SMS API For Google Drive Link
 -   Add gif that shows how to use GUI and CLI 
 -   Add option to choose which audio format to convert to
--   Append to json file 
+
 <!--Table Of DONE-->
 ## Done  
 <details>
