@@ -74,13 +74,13 @@ class Logger(object):
 
 
 def myHook(d: dict):
+    if d['status'] == 'downloading':
+        print\
+        (f"Downloading \"{d['filename'].split('/')[-1]}\" [{d['_percent_str']}] [{d['_eta_str']}]", end='\r')
     if d['status'] == 'finished':
         print("" * 200, end="\r")
         print('\nDone downloading, now converting ...')
-        print(f"downloaded \"{d['filename'].split('/')[-1]}\" to downloads/")
-    if d['status'] == 'downloading':
-        print(
-            f"Downloading \"{d['filename'].split('/')[-1]}\" [{d['_percent_str']}] [{d['_eta_str']}]", end='\r')
+        print(f"downloaded \"{d['filename'].split('/')[-1]}\" to downloads/\n")
 
 
 ydlOpts = {
@@ -172,6 +172,13 @@ def fixSongNames(songs: list):
                 "_.", ".").replace("_", " ").replace("{", "[").replace("}", "]")
         fixedSongNames.append(songs)
         return fixedSongNames[0]
+
+def fixDownloadedSongNames() -> None:
+    filenames = [filenames for filenames in os.listdir(downloadsPath) if os.path.isfile(os.path.join(downloadsPath, filenames))]
+    fixedSongNames = [fixedSongNames for fixedSongNames in map(fixSongNames, filenames)]
+    for filename in filenames:
+        filePath = os.path.join(downloadsPath, filename)
+        os.rename(filePath, os.path.join(downloadsPath, fixedSongNames[filenames.index(filename)]))
 
 ########## CHECKS ##########
 

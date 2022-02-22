@@ -26,15 +26,21 @@ def install():
 
     #Downloads the youtube url from the urls file 
     with youtube_dl.YoutubeDL(ydlOpts) as ydl:
-        if args.no_download:
-            for urlIndex in url:
+        i = 0
+        for urlIndex in url:
+            i += 1
+            if args.no_download:
                 ydl.extract_info(urlIndex, download=False)
-        else:
-            ydl.download(url)
+            else:
+                print(urlIndex)
+                data = ydl.extract_info(urlIndex, download=False)
+                print(f"[{i}/{len(url)}] {helper.fixSongNames(data['title'])}")
+                ydl.download([urlIndex])
 
 
 
 def download(quite=False):
+    helper.fixDownloadedSongNames()
     if args.ignore == False:
         if helper.checkIfConfigEmpty():
             helper.WARNING("Config file is empty")
@@ -87,9 +93,11 @@ def download(quite=False):
                 helper.ERROR("Invalid username or password",traceback)
                 #exit()
                 return
-        if helper.isDebug() == False:
-            helper.emptyUrlFile()
+        #if helper.isDebug() == False:
+        helper.emptyUrlFile()
 
-
-install()
-download()
+try:
+    install()
+    download()
+except KeyboardInterrupt:
+    print("\nExiting...")
