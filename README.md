@@ -100,6 +100,10 @@ cd build/exe."PLATFORM"
 ## CLI
 
 -   --json
+## General
+
+-   Append to json file 
+-   Add to URL list remotely
 
 # NICE TO HAVE
 
@@ -119,7 +123,8 @@ cd build/exe."PLATFORM"
 -   SMS API For Google Drive Link
 -   Add gif that shows how to use GUI and CLI 
 -   Add option to choose which audio format to convert to
--   Append to json file 
+-   Audio genre classifier
+
 <!--Table Of DONE-->
 ## Done  
 <details>
@@ -140,7 +145,6 @@ cd build/exe."PLATFORM"
 -   [✓] add "Load From File" check box in gui
 -   [✓] convert to executable
 -   [✓] add check box to toggle reading from file
-
 
 ## General
 
