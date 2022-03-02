@@ -32,7 +32,6 @@ def install():
             if args.no_download:
                 ydl.extract_info(urlIndex, download=False)
             else:
-                print(urlIndex)
                 data = ydl.extract_info(urlIndex, download=False)
                 print(f"[{i}/{len(url)}] {helper.fixSongNames(data['title'])}")
                 ydl.download([urlIndex])
@@ -94,10 +93,11 @@ def download(quite=False):
                 #exit()
                 return
         #if helper.isDebug() == False:
-        helper.emptyUrlFile()
 
 try:
     install()
     download()
+    helper.emptyUrlFile()
+    helper.emptyDownloads()
 except KeyboardInterrupt:
     print("\nExiting...")
