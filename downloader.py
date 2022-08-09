@@ -81,23 +81,18 @@ def download(quite=False):
             except smtplib.SMTPRecipientsRefused as traceback:
                 if args.ignore:
                     return
-                    #exit()
                 helper.ERROR(f"{receiver} is not a valid email address", traceback)
-                #exit()
                 return
             except smtplib.SMTPAuthenticationError as traceback:
                 if args.ignore:
-                    #exit()
                     return
                 helper.ERROR("Invalid username or password",traceback)
-                #exit()
                 return
-        #if helper.isDebug() == False:
 
 try:
     install()
     download()
-    helper.emptyUrlFile()
-    helper.emptyDownloads()
+    # helper.emptyUrlFile()
+    # helper.emptyDownloads()
 except KeyboardInterrupt:
     print("\nExiting...")
