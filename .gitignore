@@ -6,3 +6,4 @@ config.json
 downloads/*
 build/*
 devTools/urls.txt
+.idea
