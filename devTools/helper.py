@@ -79,10 +79,10 @@ def myHook(d: dict):
         (f"Downloading \"{d['filename'].split('/')[-1]}\" [{d['_percent_str']}] [{d['_eta_str']}]", end='\r')
     if d['status'] == 'finished':
         print("" * 200, end="\r")
-        print('\nDone downloading, now converting ...')
+        print('\nDone downloading, now converting...')
         print(f"downloaded \"{d['filename'].split('/')[-1]}\" to downloads/\n")
 
-
+# youtubeDL Options
 ydlOpts = {
     "format": "bestaudio/best",
     "outtmpl": "downloads/%(title)s.%(ext)s",
@@ -128,18 +128,7 @@ def fixSongNames(songs: list):
         "[HD]",
         "[Official Lyric Video]"
     ]
-    exts = [
-        ".mp3",
-        ".wav",
-        ".flac",
-        ".ogg",
-        ".m4a",
-        ".mp4",
-        ".webm",
-        ".3gp",
-        ".aac",
-        ".flv",
-    ]
+    
     lofiWords = [
         "lofi",
         "lo-fi",
