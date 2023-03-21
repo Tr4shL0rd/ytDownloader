@@ -6,6 +6,7 @@ import devTools.helper as helper
 import devTools.mail as mail
 import json
 import devTools.downloaderArgs as downloaderArgs
+import os.path
 
 
 args = downloaderArgs.parser.parse_args()
@@ -78,7 +79,7 @@ def download(quite=False):
             if quite == False:
                 print(f"[{i+1}/{len(allSongs)}] {song}")
             try:
-                mail.send(sender, password, receiver, f"downloads/{song}", f"{song}", f"{song}")
+                mail.send(sender=sender, password=password, receiver=receiver, attachment=os.path.join("downloads",song), subject=f"{song}", body=f"{song}")
             except smtplib.SMTPRecipientsRefused as traceback:
                 if args.ignore:
                     return
@@ -93,7 +94,7 @@ def download(quite=False):
 try:
     install()
     download()
-    # helper.emptyUrlFile()
-    # helper.emptyDownloads()
+    helper.emptyUrlFile()
+    helper.emptyDownloadsFolder()
 except KeyboardInterrupt:
     print("\nExiting...")

@@ -92,7 +92,7 @@ cd build/exe."PLATFORM"
 ```
 
 # DOING
-
+-   Use redmail to send email
 -   add multiple files in one email
 
 # NEED TO HAVE

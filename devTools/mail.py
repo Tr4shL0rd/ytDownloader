@@ -1,30 +1,29 @@
-import smtplib
-import mimetypes
-from email.message import EmailMessage
 from rich.console import Console 
+from redmail import gmail
+from pathlib import Path
+import os
+import dotenv
 
+dotenv.load_dotenv()
 
-def send(sender:str, password:str, receiver:str, attachment, subject="Title", body="Body", debug=False):
-    attachmentName = f"{attachment}"
+def send(sender:str, password:str, receiver:str, attachment, subject="Title", body="Body"):
+    """
+    Sends an email through Gmail
 
-    message = EmailMessage()
-    message['From'] = sender
-    message['To'] = receiver
-    message['Subject'] = subject
+    PARAMS:
+    -------
+        * sender 
+        * attachment
+        * subject 
+        * body
+    """
+    gmail.username = sender
+    gmail.password = os.environ["app_password"]
+    gmail.send(
+        subject=subject,
+        receivers=[receiver],
+        text=body,
+        attachments={subject: Path(attachment)}
+    )
 
-    message.set_content(body)
-    mime_type, _ = mimetypes.guess_type(attachment)
-    mime_type, mime_subtype = mime_type.split('/')
-    with open(attachmentName, 'rb') as file:
-        message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype, filename=attachment.split('/')[-1])
-    
-    
     Console().print("[bold green]Email sent![/bold green]")
-    mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-    if debug:
-        mail_server.set_debuglevel(1)
-    mail_server.login(sender, password)
-    mail_server.send_message(message)
-    mail_server.quit()
-
-
