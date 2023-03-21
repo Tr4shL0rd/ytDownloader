@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import smtplib
-#import youtube_dl
 import yt_dlp as youtube_dl
 import devTools.helper as helper
 import devTools.mail as mail

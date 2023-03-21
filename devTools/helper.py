@@ -4,7 +4,6 @@ import sys
 import json
 from textwrap import indent
 import dotenv
-#import youtube_dl
 import yt_dlp as youtube_dl
 import datetime
 import tkinter as tk
